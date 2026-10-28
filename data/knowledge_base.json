@@ -1,0 +1,22 @@
+[
+  {
+    "title": "CVE-2023-4911 Looney Tunables (glibc)",
+    "source": "nvd",
+    "content": "CVE-2023-4911 is a buffer overflow in the glibc dynamic loader's processing of the GLIBC_TUNABLES environment variable, enabling local privilege escalation to root. Remediation: upgrade glibc to the distribution-patched version (e.g. 2.31-13+deb11u7 on Debian 11). As a mitigation, restrict local access and monitor for setuid binary abuse. Maps to patch management controls under the vulnerability management lifecycle."
+  },
+  {
+    "title": "SQL Injection (CWE-89) remediation",
+    "source": "owasp",
+    "content": "SQL injection occurs when untrusted input is concatenated into SQL queries. Remediation: use parameterised queries / prepared statements, apply least-privilege database accounts, validate and allow-list input, and deploy a WAF rule to block common SQLi signatures as defense in depth. Verify with dynamic scanning (OWASP ZAP) after the fix."
+  },
+  {
+    "title": "Reflected XSS (CWE-79) remediation",
+    "source": "owasp",
+    "content": "Reflected cross-site scripting happens when user input is echoed into HTML without encoding. Remediation: context-aware output encoding, a strict Content-Security-Policy, and framework auto-escaping. Set X-Content-Type-Options and X-Frame-Options headers. WAF rules can block obvious script payloads while the code fix is deployed."
+  },
+  {
+    "title": "Exposed cleartext services (telnet) remediation",
+    "source": "cis",
+    "content": "Open telnet (port 23) transmits credentials in cleartext. Remediation: disable telnet, use SSH, close the port at the firewall, and segment the network. Maps to CIS Control 4 (secure configuration) and NIST PR.AC-5 (network integrity)."
+  }
+]

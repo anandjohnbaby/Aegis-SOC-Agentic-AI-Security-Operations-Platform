@@ -1,0 +1,35 @@
+# ---- core ----
+pydantic>=2.6
+pydantic-settings>=2.2
+python-dotenv>=1.0
+openai>=1.30            # used for Groq + OpenRouter (OpenAI-compatible endpoints)
+httpx>=0.27
+requests>=2.31
+
+# ---- API ----
+fastapi>=0.110
+uvicorn[standard]>=0.29
+
+# ---- RAG ----
+chromadb>=0.5.0
+
+# ---- agent frameworks ----
+langgraph>=0.2.0
+langchain-core>=0.3.0
+crewai>=0.70.0
+pyautogen>=0.2.35
+
+# ---- data / analytics ----
+pandas>=2.2
+numpy>=1.26
+streamlit>=1.33
+plotly>=5.20
+
+# ---- db ----
+sqlalchemy>=2.0
+
+# ---- tests ----
+pytest>=8.0
+pytest-asyncio>=0.23
+
+crewai, pyautogen, and chromadb are optional at runtime — the code degrades gracefully if they aren’t installed, so the LangGraph path + API + tests run on a minimal install.

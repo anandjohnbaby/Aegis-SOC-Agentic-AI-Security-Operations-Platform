@@ -1,0 +1,33 @@
+services:
+  api:
+    build: { context: ., dockerfile: docker/Dockerfile }
+    ports: ["8000:8000"]
+    env_file: .env
+    environment:
+      # inside Docker, "localhost" is the container itself - use service names
+      SERVICENOW_URL: http://servicenow:8001
+      DEFAULT_SCAN_TARGET: http://vulnerable-app:5000
+    depends_on: [servicenow, vulnerable-app]
+    volumes: ["./data:/app/data"]
+
+  servicenow:
+    build: { context: ., dockerfile: docker/Dockerfile }
+    command: uvicorn mock_apis.servicenow:app --host 0.0.0.0 --port 8001
+    ports: ["8001:8001"]
+
+  dashboard:
+    build: { context: ., dockerfile: docker/Dockerfile }
+    command: streamlit run analytics/dashboard.py --server.port 8501 --server.address 0.0.0.0 --server.headless true
+    ports: ["8501:8501"]
+    volumes: ["./data:/app/data"]
+    depends_on: [api]
+
+  vulnerable-app:
+    build: { context: ./vulnerable_apps/vulnerable_flask_app }
+    ports: ["5000:5000"]
+
+  # Optional real-mode ZAP (uncomment to enable dynamic scanning)
+  # zap:
+  #   image: ghcr.io/zaproxy/zaproxy:stable
+  #   command: zap.sh -daemon -host 0.0.0.0 -port 8090 -config api.disablekey=true
+  #   ports: ["8090:8090"]

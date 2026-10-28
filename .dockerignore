@@ -1,0 +1,9 @@
+.git
+.env
+__pycache__/
+*.pyc
+.pytest_cache/
+*.zip
+data/chroma/
+data/*.db
+data/*.jsonl
